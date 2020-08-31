@@ -8,6 +8,7 @@ import Header from "./../../components/header";
 import Layout from "./../../components/layout";
 import Main from "./../../components/main";
 import Spinner from "./../../components/spinner";
+import Table from "./../../components/table";
 
 import {
   setSelectedCurrency,
@@ -61,7 +62,62 @@ const TopTen = (props) => {
         </div>
       </Header>
       <Main>
-        <Spinner />
+        <Table>
+          <Table.Head>
+            <Table.HeaderCell defaultSort name="currency">
+              Crypto
+            </Table.HeaderCell>
+            <Table.HeaderCell name="price">Price</Table.HeaderCell>
+            <Table.HeaderCell name="marketCap">Market cap</Table.HeaderCell>
+            <Table.HeaderCell name="twentyFourHourChange">
+              24 hour change
+            </Table.HeaderCell>
+          </Table.Head>
+          <Table.Body>
+            {({ order, sort }) => {
+              return currencies
+                .sort((a, b) => {
+                  if (a[sort] > b[sort] && order === "asc") {
+                    return 1;
+                  }
+
+                  if (a[sort] < b[sort] && order === "asc") {
+                    return -1;
+                  }
+
+                  if (a[sort] > b[sort] && order === "desc") {
+                    return -1;
+                  }
+
+                  if (a[sort] < b[sort] && order === "desc") {
+                    return 1;
+                  }
+
+                  return 0;
+                })
+                .map((crypto) => {
+                  return (
+                    <div>
+                      {crypto.currency}
+                      {crypto.price}
+                    </div>
+                  );
+                });
+            }}
+          </Table.Body>
+        </Table>
+        {initialLoading && (
+          <div
+            css={css`
+              display: flex;
+              flex: 1;
+              align-items: center;
+              justify-content: center;
+            `}
+          >
+            <Spinner size={96} />
+          </div>
+        )}
       </Main>
       <Footer>
         <UpdateNotifier key={lastFetched} lastFetched={lastFetched} />
