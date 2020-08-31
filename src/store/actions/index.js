@@ -1,6 +1,8 @@
+import { SET_SELECTED_CURRENCY } from "./../constants";
+
 export const setSelectedCurrency = (currency) => {
   return {
-    type: "SET_SELECTED_CURRENCY",
+    type: SET_SELECTED_CURRENCY,
     payload: { currency },
   };
 };
