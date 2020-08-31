@@ -1,22 +1,8 @@
 import { all, call, take, race, put } from "redux-saga/effects";
 
 import { REJECTED, RESOLVED, START_REQUEST } from "./../constants";
-
-const delay = (seconds) => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve();
-    }, seconds * 1000)
-  );
-};
-
-const mockFetch = (data = "some value") => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(data);
-    }, 1000)
-  );
-};
+import { delay } from "./../../util/misc";
+import { fetchTop10Crypto } from "./../../util/network";
 
 function* handleTopTenRequest(currency) {
   yield put({
@@ -25,7 +11,7 @@ function* handleTopTenRequest(currency) {
   });
 
   try {
-    const result = yield mockFetch(currency);
+    const result = yield call(fetchTop10Crypto, currency);
 
     yield put({
       type: RESOLVED,
