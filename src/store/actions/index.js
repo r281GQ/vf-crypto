@@ -4,3 +4,16 @@ export const setSelectedCurrency = (currency) => {
     payload: { currency },
   };
 };
+
+export const startPollingTopTen = (currency) => {
+  return {
+    type: "START_POLLING_TOP_TEN",
+    payload: { currency },
+  };
+};
+
+export const stopPolling = () => {
+  return {
+    type: "STOP_POLLING",
+  };
+};
