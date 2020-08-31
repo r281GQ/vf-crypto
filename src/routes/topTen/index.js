@@ -14,6 +14,9 @@ import {
   stopPolling,
 } from "./../../store/actions";
 
+import CurrencySelector from "./../../views/currencySelector";
+
+/** @jsx jsx */
 const TopTen = (props) => {
   React.useEffect(() => {
     props.setSelectedCurrency("EUR");
@@ -38,7 +41,7 @@ const TopTen = (props) => {
           `}
         >
           <div>Crypto</div>
-          <div>setSelectedCurrency</div>
+          <CurrencySelector />
         </div>
       </Header>
       <Main>
