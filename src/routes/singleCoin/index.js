@@ -42,6 +42,15 @@ const SingleCoin = (props) => {
   const twentyFourHourVolume =
     props.crypto && props.crypto.data && props.crypto.data.twentyFourHourVolume;
 
+  const values = [
+    {
+      title: "market cap",
+      value: marketCap,
+    },
+    { title: "circulating supply", value: supply },
+    { title: "24h volume", value: twentyFourHourVolume },
+  ];
+
   return (
     <Layout>
       <Header>
@@ -102,7 +111,41 @@ const SingleCoin = (props) => {
             width: 100%;
             flex: 1;
           `}
-        />
+        >
+          <div
+            css={css`
+              display: grid;
+              justify-content: center;
+              grid-template-columns: repeat(auto-fill, 500px);
+              grid-column-gap: 32px;
+              grid-row-gap: 32px;
+            `}
+          >
+            {values.map((value) => {
+              return (
+                <div
+                  key={value.title}
+                  css={css`
+                    padding: 36px;
+                    color: ${theme().colors.text.alt};
+                  `}
+                >
+                  <div
+                    css={css`
+                      text-transform: uppercase;
+                      margin-bottom: 18px;
+                    `}
+                  >
+                    {value.title}
+                  </div>
+                  <div>
+                    {value.value ? value.value : <Spinner color="white" />}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </Main>
       <Footer>
         <UpdateNotifier key={lastFetched} lastFetched={lastFetched} />
