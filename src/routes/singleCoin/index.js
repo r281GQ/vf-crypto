@@ -6,12 +6,15 @@ import Footer from "../../components/footer";
 import Header from "./../../components/header";
 import Layout from "./../../components/layout";
 import Main from "./../../components/main";
+import Spinner from "./../../components/spinner";
 
 import { startPollingIndividual, stopPolling } from "./../../store/actions";
 
 import theme from "../../theme";
 
+import Arrow from "../../views/arrow";
 import CurrencySelector from "./../../views/currencySelector";
+import UpdateNotifier from "../../views/updateNotifier";
 
 /** @jsx jsx */
 const SingleCoin = (props) => {
@@ -44,6 +47,47 @@ const SingleCoin = (props) => {
       <Header>
         <div
           css={css`
+            width: 100%;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+          `}
+        >
+          <Arrow />
+          <div
+            css={css`
+              margin-right: 8px;
+            `}
+          />
+
+          {initialLoading ? (
+            <Spinner size={16} />
+          ) : (
+            <img
+              src={image}
+              alt={name}
+              css={css`
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+              `}
+            />
+          )}
+          <div
+            css={css`
+              margin-right: 8px;
+            `}
+          />
+          <div>{name}</div>
+          <div
+            css={css`
+              margin-right: 32px;
+            `}
+          />
+          <div>{initialLoading ? <Spinner size={16} /> : price}</div>
+        </div>
+        <div
+          css={css`
             display: flex;
             align-items: center;
           `}
@@ -60,7 +104,9 @@ const SingleCoin = (props) => {
           `}
         />
       </Main>
-      <Footer>footer</Footer>
+      <Footer>
+        <UpdateNotifier key={lastFetched} lastFetched={lastFetched} />
+      </Footer>
     </Layout>
   );
 };
