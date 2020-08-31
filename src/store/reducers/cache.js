@@ -10,6 +10,18 @@ import { REJECTED, RESOLVED, START_REQUEST } from "./../constants";
  *
  * With this structure later we can link two entities together.
  *
+ * ---
+ *
+ * NOTE: The pattern can be seen here already. Do the entities from the top10 api
+ * and the single currency api have enough overlap to somehow link them.
+ *
+ * Even if not, this structure enables us to link entities, like a user entity can have a post entity
+ * both sitting in the cache, then we can have a separate action like "LINK_ENTITY" to connect them.
+ *
+ * But that is beyond the scope of this exercise.
+ *
+ * ---
+ *
  * A cache entry is defined by a unique id. That is set up initially by the
  * "START_REQUEST" action.
  *
