@@ -32,8 +32,8 @@ const Dropdown = (props) => {
   const wrapper = React.useRef();
   const targetRef = React.useRef();
 
-  const [x, setX] = React.useState();
-  const [y, setY] = React.useState();
+  const [, setX] = React.useState();
+  const [, setY] = React.useState();
   const [width, setWidth] = React.useState();
   const [height, setHeight] = React.useState();
   const [isOpen, setOpen] = React.useState(false);
