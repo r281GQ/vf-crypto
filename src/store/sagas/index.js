@@ -1,5 +1,7 @@
 import { all, call, take, race, put } from "redux-saga/effects";
 
+import { REJECTED, RESOLVED, START_REQUEST } from "./../constants";
+
 const delay = (seconds) => {
   return new Promise((resolve) =>
     setTimeout(() => {
@@ -18,7 +20,7 @@ const mockFetch = (data = "some value") => {
 
 function* handleTopTenRequest(currency) {
   yield put({
-    type: "START_REQUEST",
+    type: START_REQUEST,
     payload: { cacheEntry: `top10_${currency}` },
   });
 
@@ -26,12 +28,12 @@ function* handleTopTenRequest(currency) {
     const result = yield mockFetch(currency);
 
     yield put({
-      type: "RESOLVED",
+      type: RESOLVED,
       payload: { cacheEntry: `top10_${currency}`, data: result },
     });
   } catch (error) {
     yield put({
-      type: "REJECTED",
+      type: REJECTED,
       payload: { cacheEntry: `top10_${currency}`, error },
     });
   }
