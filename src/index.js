@@ -1,15 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 
 import * as serviceWorker from "./serviceWorker";
 
 import Routes from "./routes";
+import store from "./store";
 
 import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Routes />
+    <Provider store={store}>
+      <Routes />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
